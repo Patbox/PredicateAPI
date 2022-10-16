@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "predicate-api",
+  "version": "${version}",
+
+  "name": "Predicate API",
+  "description": "Simple api for player-related predicates!",
+  "authors": [
+    "Patbox"
+  ],
+  "contact": {
+    "homepage": "https://pb4.eu",
+    "sources": "https://github.com/Patbox/PredicateAPI"
+  },
+  "license": "LGPLv3",
+  "icon": "assets/icon.png",
+  "environment": "*",
+  "depends": {
+    "fabricloader": ">=0.13.4",
+    "minecraft": ">=1.19.1"
+  },
+  "custom": {
+    "modmenu": {
+      "badges": [ "library" ]
+    }
+  }
+}

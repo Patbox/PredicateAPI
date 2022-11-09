@@ -5,16 +5,15 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import eu.pb4.predicate.api.AbstractPredicate;
 import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
-import net.minecraft.scoreboard.ScoreboardCriterion;
 import net.minecraft.stat.StatType;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.Registries;
 
 public final class StatisticPredicate extends AbstractPredicate {
     public static final Identifier ID = new Identifier("statistic");
     public static final MapCodec<StatisticPredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            Registry.STAT_TYPE.getCodec().optionalFieldOf("stat_type", Stats.CUSTOM).forGetter(StatisticPredicate::statType),
+            Registries.STAT_TYPE.getCodec().optionalFieldOf("stat_type", Stats.CUSTOM).forGetter(StatisticPredicate::statType),
             Identifier.CODEC.fieldOf("key").forGetter(StatisticPredicate::key)
     ).apply(instance, StatisticPredicate::new));
 
@@ -26,7 +25,7 @@ public final class StatisticPredicate extends AbstractPredicate {
     public StatisticPredicate(StatType<?> type, Identifier key) {
         super(ID, CODEC);
         this.type = type;
-        this.key = Registry.CUSTOM_STAT.get(key);
+        this.key = Registries.CUSTOM_STAT.get(key);
         this.realKey = type.getRegistry().get(this.key);
     }
 

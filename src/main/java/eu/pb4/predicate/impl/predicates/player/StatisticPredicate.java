@@ -5,10 +5,10 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import eu.pb4.predicate.api.AbstractPredicate;
 import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
+import net.minecraft.registry.Registries;
 import net.minecraft.stat.StatType;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registries;
 
 public final class StatisticPredicate extends AbstractPredicate {
     public static final Identifier ID = new Identifier("statistic");

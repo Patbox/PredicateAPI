@@ -46,7 +46,7 @@ public record PredicateContext(MinecraftServer server,
     }
 
     public static PredicateContext of(ServerPlayerEntity player) {
-        return new PredicateContext(player.getServer(), player.getCommandSource(), player.getWorld(), player, player, player.getGameProfile());
+        return new PredicateContext(player.getServer(), player.getCommandSource(), player.getServerWorld(), player, player, player.getGameProfile());
     }
 
     public static PredicateContext of(ServerCommandSource source) {

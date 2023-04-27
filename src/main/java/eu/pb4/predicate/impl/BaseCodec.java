@@ -24,7 +24,7 @@ public class BaseCodec extends MapCodec<MinecraftPredicate> {
             if (codec != null) {
                 return codec.decode(ops, input);
             } else {
-                return DataResult.error("Invalid predicate type \"" + type +"\"!");
+                return DataResult.error(() -> "Invalid predicate type \"" + type +"\"!");
             }
         });
     }

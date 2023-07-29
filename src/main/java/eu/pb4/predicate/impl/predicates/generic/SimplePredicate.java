@@ -30,6 +30,7 @@ public final class SimplePredicate extends AbstractPredicate {
     private SimplePredicate(Identifier identifier, Function<PredicateContext, PredicateResult<?>> function, MutableObject<SimplePredicate> self) {
         super(identifier, MapCodec.unit(self::getValue));
         this.function = function;
+        self.setValue(this);
     }
 
     @Override

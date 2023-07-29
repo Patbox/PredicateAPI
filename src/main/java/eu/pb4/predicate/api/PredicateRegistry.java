@@ -16,7 +16,7 @@ import java.util.Map;
 public final class PredicateRegistry {
     private static final Map<Identifier, MapCodec<MinecraftPredicate>> CODECS = new HashMap<>();
     private static final Map<MapCodec<MinecraftPredicate>, Identifier> CODEC_IDS = new HashMap<>();
-    public static final Codec<MinecraftPredicate> CODEC = new MapCodec.MapCodecCodec(new BaseCodec());
+    public static final Codec<MinecraftPredicate> CODEC = new MapCodec.MapCodecCodec<>(new BaseCodec());
 
     private PredicateRegistry() {}
 

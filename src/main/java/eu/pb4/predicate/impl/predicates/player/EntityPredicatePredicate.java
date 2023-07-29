@@ -9,12 +9,13 @@ import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
 import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.dynamic.Codecs;
 
 public class EntityPredicatePredicate extends AbstractPredicate {
     public static final Identifier ID = new Identifier("entity");
 
     public static final MapCodec<EntityPredicatePredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            EntityPredicateCodec.INSTANCE.fieldOf("value").forGetter(EntityPredicatePredicate::predicate)
+            Codecs.JSON_ELEMENT.xmap(EntityPredicate::fromJson, EntityPredicate::toJson).fieldOf("value").forGetter(EntityPredicatePredicate::predicate)
     ).apply(instance, EntityPredicatePredicate::new));
     private final EntityPredicate entityPredicate;
 
@@ -34,25 +35,4 @@ public class EntityPredicatePredicate extends AbstractPredicate {
         }
         return PredicateResult.ofFailure();
     }
-
-    private static class EntityPredicateCodec implements Codec<EntityPredicate> {
-        private static final EntityPredicateCodec INSTANCE = new EntityPredicateCodec();
-
-        @Override
-        public <T> DataResult<Pair<EntityPredicate, T>> decode(DynamicOps<T> ops, T input) {
-            return DataResult.success(new Pair<>(
-                    EntityPredicate.fromJson(input instanceof JsonElement jsonElement
-                            ? jsonElement
-                            : ops.convertTo(JsonOps.INSTANCE, input)
-                    ), input));
-        }
-
-        @Override
-        public <T> DataResult<T> encode(EntityPredicate input, DynamicOps<T> ops, T prefix) {
-            var encoded= ops instanceof JsonOps ? (T) input.toJson() : JsonOps.INSTANCE.convertTo(ops, input.toJson());
-
-            return ops.getMap(encoded).flatMap(map -> ops.mergeToMap(prefix, map));
-        }
-    }
-
 }

@@ -57,12 +57,36 @@ public final class BuiltinPredicates {
         return new NumberPredicate.MoreEqual(object, object2);
     }
 
+    public static MinecraftPredicate startsWith(Object input, Object argument) {
+        return new StringPredicate.StartsWith(input, argument);
+    }
+
+    public static MinecraftPredicate endsWith(Object input, Object argument) {
+        return new StringPredicate.EndsWith(input, argument);
+    }
+
     public static MinecraftPredicate operatorLevel(int level) {
         return new OperatorPredicate(level);
     }
 
     public static <T> MinecraftPredicate statistic(StatType<T> type, T key) {
         return new StatisticPredicate(type, type.getRegistry().getId(key));
+    }
+
+    public static MinecraftPredicate hasWorld() {
+        return SimplePredicate.HAS_WORLD;
+    }
+
+    public static MinecraftPredicate hasPlayer() {
+        return SimplePredicate.HAS_PLAYER;
+    }
+
+    public static MinecraftPredicate hasGameProfile() {
+        return SimplePredicate.HAS_GAME_PROFILE;
+    }
+
+    public static MinecraftPredicate hasEntity() {
+        return SimplePredicate.HAS_ENTITY;
     }
 
     public static <T> MinecraftPredicate vanillaEntityPredicate(EntityPredicate predicate) {

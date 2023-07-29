@@ -78,7 +78,6 @@ Checks if player has required operator level.
   "key": ""
 }
 ```
-
 Checks and returns value of player's statistic with success value of true 
 if it's higher than 0. Should be used with other predicates.
 
@@ -95,7 +94,7 @@ See https://minecraft.fandom.com/wiki/Statistics#Statistic_types_and_names
 }
 ```
 
-Checks using Vanilla (advancement/loot table) predicates.
+Checks using Vanilla (advancement) predicates.
 
 See https://minecraft.fandom.com/wiki/Template:Nbt_inherit/conditions/entity
 
@@ -130,13 +129,46 @@ Should be used with others for more specific checks
 ```json5
 {
   "type": "placeholder",
-  // Placeholder value with arguments, without `%`
+  // Placeholder value with arguments, without `%`, for example "player:displayname"
   "placeholder": "...",
   // (Optional) Boolean, making it return raw value (if provides string, it won't be formatted). Defaults to false
   "raw": false
 }
 ```
 
-Checks if player has specified option set by permission mod.
-Should be used with others for more specific checks
-(see Comparator predicates).
+Returns value of provided placeholder, to be used with other comparators.
+
+
+## Has (Entity/Player/World/Game Profile) (0.2.0+1.20.1 and newer)
+```json5
+{
+  // [X] needs to be replaced with entity, player, world, game_profile
+  "type": "has_[X]"
+}
+```
+
+Checks if Entity/Player/World/Game Profile is present.
+
+## Starts With (0.2.0+1.20.1 and newer)
+```json5
+{
+  "type": "starts_with",
+  // A string (text in quotes), a number or predicate definition
+  "input": "",
+  "argument": "",
+}
+```
+
+Checks if input starts with argument (converted to strings)
+
+## Ends With (0.2.0+1.20.1 and newer)
+```json5
+{
+  "type": "ends_with",
+  // A string (text in quotes), a number or predicate definition
+  "input": "",
+  "argument": "",
+}
+```
+
+Checks if input starts with argument (converted to strings)

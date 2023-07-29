@@ -58,7 +58,7 @@ dependencies {
 	modCompileOnly("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
 	modLocalRuntime("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
 	modLocalRuntime("eu.pb4:polymer-reg-sync-manipulator:0.0.1+1.19")
-	modCompileOnly("eu.pb4:placeholder-api:2.0.0-pre.1+1.19.2")
+	modCompileOnly("eu.pb4:placeholder-api:2.1.1+1.20")
 	modCompileOnly("me.lucko:fabric-permissions-api:0.2-SNAPSHOT")
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.

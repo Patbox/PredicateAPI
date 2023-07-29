@@ -7,10 +7,10 @@ import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
 import net.minecraft.util.Identifier;
 
-public final class UnitPredicate extends AbstractPredicate {
+public final class ConstantUnitPredicate extends AbstractPredicate {
     private final PredicateResult<Object> value;
 
-    public <T extends MinecraftPredicate> UnitPredicate(Object value) {
+    public <T extends MinecraftPredicate> ConstantUnitPredicate(Object value) {
         super(new Identifier("unit"), MapCodec.unit(null));
 
         this.value = PredicateResult.ofNullable(value);

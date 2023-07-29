@@ -10,7 +10,7 @@ public final class GenericObject {
     public static final Codec<Object> CODEC = (Codec<Object>) (Object) Codec.either(PredicateRegistry.CODEC, Codec.either(Codec.STRING, Codec.DOUBLE));
 
     public static MinecraftPredicate toPredicate(Object valueA) {
-        if (valueA instanceof Either<?,?> either) {
+        if (valueA instanceof Either<?, ?> either) {
             if (either.left().isPresent()) {
                 return toPredicate(either.left().get());
             } else {
@@ -37,5 +37,20 @@ public final class GenericObject {
 
         }
         return bool ? 1 : 0;
+    }
+
+    public static String toString(Object value) {
+        try {
+            if (value instanceof Text text) {
+                return text.getString();
+            } else if (value instanceof String string) {
+                return string;
+            } else {
+                return value.toString();
+            }
+        } catch (Throwable e) {
+
+        }
+        return "";
     }
 }

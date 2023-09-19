@@ -15,7 +15,7 @@ public class EntityPredicatePredicate extends AbstractPredicate {
     public static final Identifier ID = new Identifier("entity");
 
     public static final MapCodec<EntityPredicatePredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            Codecs.JSON_ELEMENT.xmap(EntityPredicate::fromJson, EntityPredicate::toJson).fieldOf("value").forGetter(EntityPredicatePredicate::predicate)
+            EntityPredicate.CODEC.fieldOf("value").forGetter(EntityPredicatePredicate::predicate)
     ).apply(instance, EntityPredicatePredicate::new));
     private final EntityPredicate entityPredicate;
 

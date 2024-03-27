@@ -10,8 +10,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public record PredicateContext(MinecraftServer server,
                                ServerCommandSource source,

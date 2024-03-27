@@ -1,7 +1,7 @@
 package eu.pb4.predicate.api;
 
+import net.minecraft.text.PlainTextContent;
 import net.minecraft.text.Text;
-import net.minecraft.text.TextContent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -32,7 +32,7 @@ public record PredicateResult<T>(boolean success, @Nullable T value) {
     }
 
     public static PredicateResult<Text> ofText(Text value) {
-        return new PredicateResult<>(!value.getSiblings().isEmpty() && value.getContent() != TextContent.EMPTY, value);
+        return new PredicateResult<>(!value.getSiblings().isEmpty() && value.getContent() != PlainTextContent.EMPTY, value);
     }
 
     public static <T> PredicateResult<T> ofOptional(Optional<T> optional) {

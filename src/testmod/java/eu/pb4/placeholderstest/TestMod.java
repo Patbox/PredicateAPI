@@ -27,7 +27,7 @@ public class TestMod implements ModInitializer {
     public void onInitialize() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, dedicated) -> {
             dispatcher.register(
-                    literal("test").then(argument("text", TextArgumentType.text()).executes(TestMod::test))
+                    literal("test").then(argument("text", TextArgumentType.text(registryAccess)).executes(TestMod::test))
             );
         });
     }

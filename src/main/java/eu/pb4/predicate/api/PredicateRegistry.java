@@ -25,12 +25,8 @@ public final class PredicateRegistry {
     }
 
     public static <T> MinecraftPredicate decode(DynamicOps<T> ops, T object) {
-        try {
-            var data = CODEC.decode(ops, object);
-            return data.getOrThrow(false, (s) -> {}).getFirst();
-        } catch (Throwable e) {
-            throw new IllegalArgumentException(e);
-        }
+        var data = CODEC.decode(ops, object);
+        return data.getOrThrow(IllegalArgumentException::new).getFirst();
     }
 
     @Nullable

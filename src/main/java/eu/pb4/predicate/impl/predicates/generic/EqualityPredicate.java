@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public final class EqualityPredicate extends AbstractPredicate {
 
-    public static final Identifier ID = new Identifier("equal");
+    public static final Identifier ID = Identifier.of("equal");
     public static final MapCodec<EqualityPredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             GenericObject.CODEC.fieldOf("value_1").forGetter(EqualityPredicate::valueA),
             GenericObject.CODEC.fieldOf("value_2").forGetter(EqualityPredicate::valueB)

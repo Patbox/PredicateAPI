@@ -11,7 +11,7 @@ public final class ConstantUnitPredicate extends AbstractPredicate {
     private final PredicateResult<Object> value;
 
     public <T extends MinecraftPredicate> ConstantUnitPredicate(Object value) {
-        super(new Identifier("unit"), MapCodec.unit(null));
+        super(Identifier.of("unit"), MapCodec.unit(null));
 
         this.value = PredicateResult.ofNullable(value);
     }

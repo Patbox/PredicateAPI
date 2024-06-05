@@ -12,10 +12,10 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public final class SimplePredicate extends AbstractPredicate {
-    public static final MinecraftPredicate HAS_PLAYER = new SimplePredicate(new Identifier("has_player"), PredicateContext::hasPlayer);
-    public static final MinecraftPredicate HAS_ENTITY = new SimplePredicate(new Identifier("has_entity"), PredicateContext::hasEntity);
-    public static final MinecraftPredicate HAS_WORLD = new SimplePredicate(new Identifier("has_world"), PredicateContext::hasWorld);
-    public static final MinecraftPredicate HAS_GAME_PROFILE = new SimplePredicate(new Identifier("has_game_profile"), PredicateContext::hasGameProfile);
+    public static final MinecraftPredicate HAS_PLAYER = new SimplePredicate(Identifier.of("has_player"), PredicateContext::hasPlayer);
+    public static final MinecraftPredicate HAS_ENTITY = new SimplePredicate(Identifier.of("has_entity"), PredicateContext::hasEntity);
+    public static final MinecraftPredicate HAS_WORLD = new SimplePredicate(Identifier.of("has_world"), PredicateContext::hasWorld);
+    public static final MinecraftPredicate HAS_GAME_PROFILE = new SimplePredicate(Identifier.of("has_game_profile"), PredicateContext::hasGameProfile);
 
     private final Function<PredicateContext, PredicateResult<?>> function;
 

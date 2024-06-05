@@ -53,7 +53,7 @@ public abstract class StringPredicate extends AbstractPredicate {
     protected abstract PredicateResult<?> testString(String a, String b);
 
     public static final class StartsWith extends StringPredicate {
-        public static final Identifier ID = new Identifier("starts_with");
+        public static final Identifier ID = Identifier.of("starts_with");
         public static final MapCodec<StartsWith> CODEC = StringPredicate.codec(StartsWith::new);
 
         public <T extends MinecraftPredicate> StartsWith(Object value, Object argument) {
@@ -67,7 +67,7 @@ public abstract class StringPredicate extends AbstractPredicate {
     }
 
     public static final class EndsWith extends StringPredicate {
-        public static final Identifier ID = new Identifier("ends_with");
+        public static final Identifier ID = Identifier.of("ends_with");
         public static final MapCodec<EndsWith> CODEC = StringPredicate.codec(EndsWith::new);
 
         public <T extends MinecraftPredicate> EndsWith(Object value, Object argument) {
@@ -81,7 +81,7 @@ public abstract class StringPredicate extends AbstractPredicate {
     }
 
     public static final class Join extends StringPredicate {
-        public static final Identifier ID = new Identifier("join_string");
+        public static final Identifier ID = Identifier.of("join_string");
         public static final MapCodec<Join> CODEC = StringPredicate.codec(Join::new);
 
         public <T extends MinecraftPredicate> Join(Object value, Object argument) {

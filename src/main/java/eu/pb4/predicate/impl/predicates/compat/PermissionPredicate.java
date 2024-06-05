@@ -10,7 +10,7 @@ import me.lucko.fabric.api.permissions.v0.Permissions;
 import net.minecraft.util.Identifier;
 
 public final class PermissionPredicate extends AbstractPredicate {
-    public static final Identifier ID = new Identifier("permission");
+    public static final Identifier ID = Identifier.of("permission");
     public static final MapCodec<PermissionPredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.STRING.fieldOf("permission").forGetter(PermissionPredicate::permission),
             Codec.INT.optionalFieldOf("operator", -1).forGetter(PermissionPredicate::operator)

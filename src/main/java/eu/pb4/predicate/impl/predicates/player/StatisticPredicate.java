@@ -11,7 +11,7 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 
 public final class StatisticPredicate extends AbstractPredicate {
-    public static final Identifier ID = new Identifier("statistic");
+    public static final Identifier ID = Identifier.of("statistic");
     public static final MapCodec<StatisticPredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Registries.STAT_TYPE.getCodec().optionalFieldOf("stat_type", Stats.CUSTOM).forGetter(StatisticPredicate::statType),
             Identifier.CODEC.fieldOf("key").forGetter(StatisticPredicate::key)

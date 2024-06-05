@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 import java.util.List;
 
 public final class AnyPredicate extends AbstractPredicate {
-    public static final Identifier ID = new Identifier("any");
+    public static final Identifier ID = Identifier.of("any");
     public static final MapCodec<AnyPredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.list(PredicateRegistry.CODEC).fieldOf("values").forGetter(AnyPredicate::values)
     ).apply(instance, AnyPredicate::new));

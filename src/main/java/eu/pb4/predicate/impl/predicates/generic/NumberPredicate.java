@@ -54,7 +54,7 @@ public abstract class NumberPredicate extends AbstractPredicate {
     protected abstract boolean check(double a, double b);
 
     public static final class LessThan extends NumberPredicate {
-        public static final Identifier ID = new Identifier("less_than");
+        public static final Identifier ID = Identifier.of("less_than");
         public static final MapCodec<LessThan> CODEC = NumberPredicate.codec(LessThan::new);
 
         public LessThan(Object valueA, Object valueB) {
@@ -68,7 +68,7 @@ public abstract class NumberPredicate extends AbstractPredicate {
     }
 
     public static final class LessEqual extends NumberPredicate {
-        public static final Identifier ID = new Identifier("less_or_equal");
+        public static final Identifier ID = Identifier.of("less_or_equal");
         public static final MapCodec<LessEqual> CODEC = NumberPredicate.codec(LessEqual::new);
 
         public LessEqual(Object valueA, Object valueB) {
@@ -82,7 +82,7 @@ public abstract class NumberPredicate extends AbstractPredicate {
     }
 
     public static final class MoreThan extends NumberPredicate {
-        public static final Identifier ID = new Identifier("more_than");
+        public static final Identifier ID = Identifier.of("more_than");
         public static final MapCodec<MoreThan> CODEC = NumberPredicate.codec(MoreThan::new);
 
         public MoreThan(Object valueA, Object valueB) {
@@ -96,7 +96,7 @@ public abstract class NumberPredicate extends AbstractPredicate {
     }
 
     public static final class MoreEqual extends NumberPredicate {
-        public static final Identifier ID = new Identifier("more_or_equal");
+        public static final Identifier ID = Identifier.of("more_or_equal");
         public static final MapCodec<MoreEqual> CODEC = NumberPredicate.codec(MoreEqual::new);
 
         public MoreEqual(Object valueA, Object valueB) {

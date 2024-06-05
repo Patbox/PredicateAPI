@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.Codecs;
 
 public class EntityPredicatePredicate extends AbstractPredicate {
-    public static final Identifier ID = new Identifier("entity");
+    public static final Identifier ID = Identifier.of("entity");
 
     public static final MapCodec<EntityPredicatePredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             EntityPredicate.CODEC.fieldOf("value").forGetter(EntityPredicatePredicate::predicate)

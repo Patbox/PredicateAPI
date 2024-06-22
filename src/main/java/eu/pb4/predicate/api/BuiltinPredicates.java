@@ -17,6 +17,14 @@ import java.util.List;
 public final class BuiltinPredicates {
     private BuiltinPredicates() {}
 
+    public static MinecraftPredicate alwaysTrue() {
+        return SimplePredicate.ALWAYS_TRUE;
+    }
+
+    public static MinecraftPredicate alwaysFalse() {
+        return SimplePredicate.ALWAYS_FALSE;
+    }
+
     public static MinecraftPredicate all(MinecraftPredicate... predicates) {
         return new AllPredicate(List.of(predicates));
     }
@@ -111,5 +119,9 @@ public final class BuiltinPredicates {
     @Nullable
     public static MinecraftPredicate modPermissionApi(String permission) {
         return CompatStatus.LUCKO_PERMISSION_API ? new PermissionPredicate(permission, -1) : null;
+    }
+
+    static {
+        PredicateRegistry.CODEC.fieldOf("");
     }
 }

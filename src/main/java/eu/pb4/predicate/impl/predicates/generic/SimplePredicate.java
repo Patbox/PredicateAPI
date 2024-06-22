@@ -12,6 +12,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public final class SimplePredicate extends AbstractPredicate {
+    public static final MinecraftPredicate ALWAYS_TRUE = new SimplePredicate(Identifier.of("always_true"), (Predicate<PredicateContext>) ctx -> true);
+    public static final MinecraftPredicate ALWAYS_FALSE = new SimplePredicate(Identifier.of("always_false"), (Predicate<PredicateContext>) ctx -> false);
     public static final MinecraftPredicate HAS_PLAYER = new SimplePredicate(Identifier.of("has_player"), PredicateContext::hasPlayer);
     public static final MinecraftPredicate HAS_ENTITY = new SimplePredicate(Identifier.of("has_entity"), PredicateContext::hasEntity);
     public static final MinecraftPredicate HAS_WORLD = new SimplePredicate(Identifier.of("has_world"), PredicateContext::hasWorld);

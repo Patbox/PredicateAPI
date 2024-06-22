@@ -36,6 +36,8 @@ public class PredicatesInit {
         register(SimplePredicate.HAS_PLAYER);
         register(SimplePredicate.HAS_WORLD);
         register(SimplePredicate.HAS_GAME_PROFILE);
+        register(SimplePredicate.ALWAYS_TRUE);
+        register(SimplePredicate.ALWAYS_FALSE);
 
         if (CompatStatus.PLACEHOLDER_API) {
             register(PlaceholderPredicate.ID, PlaceholderPredicate.CODEC);

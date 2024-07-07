@@ -81,7 +81,7 @@ Checks if player has required operator level.
 Checks and returns value of player's statistic with success value of true 
 if it's higher than 0. Should be used with other predicates.
 
-See https://minecraft.fandom.com/wiki/Statistics#Statistic_types_and_names
+See https://minecraft.wiki/w/Statistics#Statistic_types_and_names
 
 ## Entity predicate
 ```json5
@@ -96,7 +96,7 @@ See https://minecraft.fandom.com/wiki/Statistics#Statistic_types_and_names
 
 Checks using Vanilla (advancement) predicates.
 
-See https://minecraft.fandom.com/wiki/Template:Nbt_inherit/conditions/entity
+See https://minecraft.wiki/w/Template:Nbt_inherit/conditions/entity
 
 ## Permission predicate (requires Lucko/Fabric Permission API)
 ```json5

@@ -56,7 +56,7 @@ public record PredicateContext(MinecraftServer server,
         if (entity instanceof ServerPlayerEntity player) {
             return of(player);
         } else {
-            return new PredicateContext(entity.getServer(), entity.getCommandSource(), (ServerWorld) entity.getWorld(), null, entity, null);
+            return new PredicateContext(entity.getServer(), entity.getCommandSource((ServerWorld) entity.getWorld()), (ServerWorld) entity.getWorld(), null, entity, null);
         }
     }
 }

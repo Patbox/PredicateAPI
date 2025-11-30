@@ -1,22 +1,22 @@
 package eu.pb4.predicate.api;
 
 import com.mojang.authlib.GameProfile;
-import net.minecraft.entity.Entity;
+import net.minecraft.commands.CommandSource;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.PlayerConfigEntry;
-import net.minecraft.server.command.CommandOutput;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.Vec2f;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.NameAndId;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public record PredicateContext(MinecraftServer server,
-                               ServerCommandSource source,
-                               @Nullable ServerWorld world,
-                               @Nullable ServerPlayerEntity player,
+                               CommandSourceStack source,
+                               @Nullable ServerLevel world,
+                               @Nullable ServerPlayer player,
                                @Nullable Entity entity,
                                @Nullable GameProfile gameProfile
 ) {
@@ -37,27 +37,27 @@ public record PredicateContext(MinecraftServer server,
     }
 
     public static PredicateContext of(MinecraftServer server) {
-        return new PredicateContext(server,  server.getCommandSource(), null, null, null, null);
+        return new PredicateContext(server,  server.createCommandSourceStack(), null, null, null, null);
     }
 
     public static PredicateContext of(GameProfile profile, MinecraftServer server) {
         var name = !profile.name().isEmpty() ? profile.name() : profile.id().toString();
-        return new PredicateContext(server, new ServerCommandSource(CommandOutput.DUMMY, Vec3d.ZERO, Vec2f.ZERO, server.getOverworld(), server.getPermissionLevel(new PlayerConfigEntry(profile)), name, Text.literal(name), server, null), null, null, null, profile);
+        return new PredicateContext(server, new CommandSourceStack(CommandSource.NULL, Vec3.ZERO, Vec2.ZERO, server.overworld(), server.getProfilePermissions(new NameAndId(profile)), name, Component.literal(name), server, null), null, null, null, profile);
     }
 
-    public static PredicateContext of(ServerPlayerEntity player) {
-        return new PredicateContext(player.getEntityWorld().getServer(), player.getCommandSource(), player.getEntityWorld(), player, player, player.getGameProfile());
+    public static PredicateContext of(ServerPlayer player) {
+        return new PredicateContext(player.level().getServer(), player.createCommandSourceStack(), player.level(), player, player, player.getGameProfile());
     }
 
-    public static PredicateContext of(ServerCommandSource source) {
-        return new PredicateContext(source.getServer(), source, source.getWorld(), source.getPlayer(), source.getEntity(), source.getPlayer() != null ? source.getPlayer().getGameProfile() : null);
+    public static PredicateContext of(CommandSourceStack source) {
+        return new PredicateContext(source.getServer(), source, source.getLevel(), source.getPlayer(), source.getEntity(), source.getPlayer() != null ? source.getPlayer().getGameProfile() : null);
     }
 
     public static PredicateContext of(Entity entity) {
-        if (entity instanceof ServerPlayerEntity player) {
+        if (entity instanceof ServerPlayer player) {
             return of(player);
         } else {
-            return new PredicateContext(entity.getEntityWorld().getServer(), entity.getCommandSource((ServerWorld) entity.getEntityWorld()), (ServerWorld) entity.getEntityWorld(), null, entity, null);
+            return new PredicateContext(entity.level().getServer(), entity.createCommandSourceStackForNameResolution((ServerLevel) entity.level()), (ServerLevel) entity.level(), null, entity, null);
         }
     }
 }

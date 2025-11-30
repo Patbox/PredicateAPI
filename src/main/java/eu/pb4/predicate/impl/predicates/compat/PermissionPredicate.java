@@ -7,16 +7,15 @@ import eu.pb4.predicate.api.AbstractPredicate;
 import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
 import me.lucko.fabric.api.permissions.v0.Permissions;
-import net.minecraft.command.permission.PermissionLevel;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.permissions.PermissionLevel;
 import java.util.Optional;
 
 public final class PermissionPredicate extends AbstractPredicate {
-    public static final Identifier ID = Identifier.of("permission");
+    public static final Identifier ID = Identifier.parse("permission");
     public static final MapCodec<PermissionPredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.STRING.fieldOf("permission").forGetter(PermissionPredicate::permission),
-            Codec.withAlternative(PermissionLevel.CODEC, PermissionLevel.NUMERIC_CODEC).optionalFieldOf("operator").forGetter(PermissionPredicate::permissionLevel)
+            Codec.withAlternative(PermissionLevel.CODEC, PermissionLevel.INT_CODEC).optionalFieldOf("operator").forGetter(PermissionPredicate::permissionLevel)
     ).apply(instance, PermissionPredicate::new));
 
     private final String permission;
@@ -24,7 +23,7 @@ public final class PermissionPredicate extends AbstractPredicate {
 
     @Deprecated
     public PermissionPredicate(String permission, int operator) {
-        this(permission, operator < 0 ? Optional.empty() : Optional.of(PermissionLevel.fromLevel(operator)));
+        this(permission, operator < 0 ? Optional.empty() : Optional.of(PermissionLevel.byId(operator)));
     }
 
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")

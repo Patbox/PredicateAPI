@@ -8,10 +8,10 @@ import eu.pb4.placeholders.api.Placeholders;
 import eu.pb4.predicate.api.AbstractPredicate;
 import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 
 public final class PlaceholderPredicate extends AbstractPredicate {
-    public static final Identifier ID = Identifier.of("placeholder");
+    public static final Identifier ID = Identifier.parse("placeholder");
     public static final MapCodec<PlaceholderPredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.STRING.fieldOf("placeholder").forGetter(PlaceholderPredicate::value),
             Codec.BOOL.optionalFieldOf("raw", false).forGetter(PlaceholderPredicate::raw)

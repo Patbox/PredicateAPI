@@ -7,12 +7,11 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import eu.pb4.predicate.api.AbstractPredicate;
 import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
-import net.minecraft.predicate.entity.EntityPredicate;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.dynamic.Codecs;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.resources.Identifier;
 
 public class EntityPredicatePredicate extends AbstractPredicate {
-    public static final Identifier ID = Identifier.of("entity");
+    public static final Identifier ID = Identifier.parse("entity");
 
     public static final MapCodec<EntityPredicatePredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             EntityPredicate.CODEC.fieldOf("value").forGetter(EntityPredicatePredicate::predicate)
@@ -31,7 +30,7 @@ public class EntityPredicatePredicate extends AbstractPredicate {
     @Override
     public PredicateResult<?> test(PredicateContext context) {
         if (context.hasEntity()) {
-            return PredicateResult.ofBoolean(this.entityPredicate.test(context.world(), context.entity().getEntityPos(), context.entity()));
+            return PredicateResult.ofBoolean(this.entityPredicate.matches(context.world(), context.entity().position(), context.entity()));
         }
         return PredicateResult.ofFailure();
     }

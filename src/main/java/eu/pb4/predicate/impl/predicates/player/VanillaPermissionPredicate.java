@@ -7,14 +7,12 @@ import eu.pb4.predicate.api.AbstractPredicate;
 import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
 import me.lucko.fabric.api.permissions.v0.Permissions;
-import net.minecraft.command.permission.Permission;
-import net.minecraft.command.permission.PermissionLevel;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.permissions.Permission;
 import java.util.Optional;
 
 public final class VanillaPermissionPredicate extends AbstractPredicate {
-    public static final Identifier ID = Identifier.of("vanilla_permission");
+    public static final Identifier ID = Identifier.parse("vanilla_permission");
     public static final MapCodec<VanillaPermissionPredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Permission.CODEC.fieldOf("value").forGetter(VanillaPermissionPredicate::permission)
     ).apply(instance, VanillaPermissionPredicate::new));
@@ -32,6 +30,6 @@ public final class VanillaPermissionPredicate extends AbstractPredicate {
     }
     @Override
     public PredicateResult<?> test(PredicateContext context) {
-        return PredicateResult.ofBoolean(context.source().getPermissions().hasPermission(this.permission));
+        return PredicateResult.ofBoolean(context.source().permissions().hasPermission(this.permission));
     }
 }

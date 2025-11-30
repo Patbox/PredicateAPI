@@ -7,13 +7,13 @@ import eu.pb4.predicate.impl.predicates.generic.*;
 import eu.pb4.predicate.impl.predicates.player.OperatorPredicate;
 import eu.pb4.predicate.impl.predicates.player.StatisticPredicate;
 import eu.pb4.predicate.impl.predicates.player.EntityPredicatePredicate;
-import net.minecraft.command.permission.PermissionLevel;
-import net.minecraft.predicate.entity.EntityPredicate;
-import net.minecraft.stat.StatType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.server.permissions.PermissionLevel;
+import net.minecraft.stats.StatType;
 
 public final class BuiltinPredicates {
     private BuiltinPredicates() {}
@@ -85,7 +85,7 @@ public final class BuiltinPredicates {
 
 
     public static <T> MinecraftPredicate statistic(StatType<T> type, T key) {
-        return new StatisticPredicate(type, type.getRegistry().getId(key));
+        return new StatisticPredicate(type, type.getRegistry().getKey(key));
     }
 
     public static MinecraftPredicate hasWorld() {
@@ -123,7 +123,7 @@ public final class BuiltinPredicates {
     }
 
     public static MinecraftPredicate modPermissionApi(String permission, PermissionLevel alternativeOperatorLevel) {
-        return CompatStatus.LUCKO_PERMISSION_API ? new PermissionPredicate(permission, alternativeOperatorLevel.getLevel()) : operatorLevel(alternativeOperatorLevel);
+        return CompatStatus.LUCKO_PERMISSION_API ? new PermissionPredicate(permission, alternativeOperatorLevel.id()) : operatorLevel(alternativeOperatorLevel);
     }
 
     @Nullable

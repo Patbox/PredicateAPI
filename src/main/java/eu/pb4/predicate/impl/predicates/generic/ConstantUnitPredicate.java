@@ -5,13 +5,13 @@ import eu.pb4.predicate.api.AbstractPredicate;
 import eu.pb4.predicate.api.MinecraftPredicate;
 import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 
 public final class ConstantUnitPredicate extends AbstractPredicate {
     private final PredicateResult<Object> value;
 
     public <T extends MinecraftPredicate> ConstantUnitPredicate(Object value) {
-        super(Identifier.of("unit"), MapCodec.unit(null));
+        super(Identifier.parse("unit"), MapCodec.unit(null));
 
         this.value = PredicateResult.ofNullable(value);
     }

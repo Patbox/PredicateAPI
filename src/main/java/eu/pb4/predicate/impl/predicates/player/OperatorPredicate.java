@@ -6,15 +6,14 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import eu.pb4.predicate.api.AbstractPredicate;
 import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
-import net.minecraft.command.permission.LeveledPermissionPredicate;
-import net.minecraft.command.permission.Permission;
-import net.minecraft.command.permission.PermissionLevel;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.permissions.Permission;
+import net.minecraft.server.permissions.PermissionLevel;
 
 public final class OperatorPredicate extends AbstractPredicate {
-    public static final Identifier ID = Identifier.of("operator");
+    public static final Identifier ID = Identifier.parse("operator");
     public static final MapCodec<OperatorPredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            Codec.withAlternative(PermissionLevel.CODEC, PermissionLevel.NUMERIC_CODEC).fieldOf("operator").forGetter(OperatorPredicate::level)
+            Codec.withAlternative(PermissionLevel.CODEC, PermissionLevel.INT_CODEC).fieldOf("operator").forGetter(OperatorPredicate::level)
     ).apply(instance, OperatorPredicate::new));
 
     private final PermissionLevel level;
@@ -22,13 +21,13 @@ public final class OperatorPredicate extends AbstractPredicate {
 
     @Deprecated
     public OperatorPredicate(int operator) {
-        this(PermissionLevel.fromLevel(operator));
+        this(PermissionLevel.byId(operator));
     }
 
     public OperatorPredicate(PermissionLevel level) {
         super(ID, CODEC);
         this.level = level;
-        this.permission = new Permission.Level(this.level);
+        this.permission = new Permission.HasCommandLevel(this.level);
     }
 
     private PermissionLevel level() {
@@ -37,6 +36,6 @@ public final class OperatorPredicate extends AbstractPredicate {
 
     @Override
     public PredicateResult<?> test(PredicateContext context) {
-        return PredicateResult.ofBoolean(context.source().getPermissions().hasPermission(this.permission));
+        return PredicateResult.ofBoolean(context.source().permissions().hasPermission(this.permission));
     }
 }

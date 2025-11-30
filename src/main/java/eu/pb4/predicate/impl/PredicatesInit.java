@@ -12,7 +12,7 @@ import eu.pb4.predicate.impl.predicates.player.OperatorPredicate;
 import eu.pb4.predicate.impl.predicates.player.StatisticPredicate;
 import eu.pb4.predicate.impl.predicates.player.EntityPredicatePredicate;
 import eu.pb4.predicate.impl.predicates.player.VanillaPermissionPredicate;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 
 
 public class PredicatesInit {

@@ -6,14 +6,13 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import eu.pb4.predicate.api.*;
 import eu.pb4.predicate.impl.predicates.GenericObject;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-
 import java.util.Objects;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 
 public final class EqualityPredicate extends AbstractPredicate {
 
-    public static final Identifier ID = Identifier.of("equal");
+    public static final Identifier ID = Identifier.parse("equal");
     public static final MapCodec<EqualityPredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             GenericObject.CODEC.fieldOf("value_1").forGetter(EqualityPredicate::valueA),
             GenericObject.CODEC.fieldOf("value_2").forGetter(EqualityPredicate::valueB)
@@ -46,9 +45,9 @@ public final class EqualityPredicate extends AbstractPredicate {
         var val1 = this.predicate1.test(context);
         var val2 = this.predicate2.test(context);
 
-        if (val1.value() instanceof Text text && val2.value() instanceof String string) {
+        if (val1.value() instanceof Component text && val2.value() instanceof String string) {
             return PredicateResult.ofBoolean(text.getString().equals(string));
-        } else if (val2.value() instanceof Text text && val1.value() instanceof String string) {
+        } else if (val2.value() instanceof Component text && val1.value() instanceof String string) {
             return PredicateResult.ofBoolean(text.getString().equals(string));
         } else {
             return PredicateResult.ofBoolean(val1.success() == val2.success() && Objects.equals(val1.value(), val2.value()));

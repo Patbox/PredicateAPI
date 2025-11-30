@@ -2,22 +2,21 @@ package eu.pb4.predicate.api;
 
 import com.google.gson.*;
 import com.mojang.serialization.JsonOps;
-import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryWrapper;
-
 import java.lang.reflect.Type;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 public final class GsonPredicateSerializer implements JsonSerializer<MinecraftPredicate>, JsonDeserializer<MinecraftPredicate> {
     @Deprecated(forRemoval = true)
-    public static final GsonPredicateSerializer INSTANCE = create(DynamicRegistryManager.of(Registries.REGISTRIES));
-    private final RegistryWrapper.WrapperLookup lookup;
+    public static final GsonPredicateSerializer INSTANCE = create(RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY));
+    private final HolderLookup.Provider lookup;
 
-    public static GsonPredicateSerializer create(RegistryWrapper.WrapperLookup lookup) {
+    public static GsonPredicateSerializer create(HolderLookup.Provider lookup) {
         return new GsonPredicateSerializer(lookup);
     }
 
-    private GsonPredicateSerializer(RegistryWrapper.WrapperLookup lookup) {
+    private GsonPredicateSerializer(HolderLookup.Provider lookup) {
         this.lookup = lookup;
     }
 
@@ -32,6 +31,6 @@ public final class GsonPredicateSerializer implements JsonSerializer<MinecraftPr
 
     @Override
     public JsonElement serialize(MinecraftPredicate minecraftPredicate, Type type, JsonSerializationContext jsonSerializationContext) {
-        return PredicateRegistry.CODEC.encode(minecraftPredicate, this.lookup.getOps(JsonOps.INSTANCE), new JsonObject()).result().get();
+        return PredicateRegistry.CODEC.encode(minecraftPredicate, this.lookup.createSerializationContext(JsonOps.INSTANCE), new JsonObject()).result().get();
     }
 }

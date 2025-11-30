@@ -4,12 +4,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import eu.pb4.predicate.api.*;
-import net.minecraft.util.Identifier;
-
 import java.util.List;
+import net.minecraft.resources.Identifier;
 
 public final class AnyPredicate extends AbstractPredicate {
-    public static final Identifier ID = Identifier.of("any");
+    public static final Identifier ID = Identifier.parse("any");
     public static final MapCodec<AnyPredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.list(PredicateRegistry.CODEC).fieldOf("values").forGetter(AnyPredicate::values)
     ).apply(instance, AnyPredicate::new));

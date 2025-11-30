@@ -7,10 +7,9 @@ import eu.pb4.predicate.api.MinecraftPredicate;
 import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
 import eu.pb4.predicate.impl.predicates.GenericObject;
-import net.minecraft.util.Identifier;
-
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import net.minecraft.resources.Identifier;
 
 public abstract class StringPredicate extends AbstractPredicate {
     private final Object value;
@@ -53,7 +52,7 @@ public abstract class StringPredicate extends AbstractPredicate {
     protected abstract PredicateResult<?> testString(String a, String b);
 
     public static final class StartsWith extends StringPredicate {
-        public static final Identifier ID = Identifier.of("starts_with");
+        public static final Identifier ID = Identifier.parse("starts_with");
         public static final MapCodec<StartsWith> CODEC = StringPredicate.codec(StartsWith::new);
 
         public <T extends MinecraftPredicate> StartsWith(Object value, Object argument) {
@@ -67,7 +66,7 @@ public abstract class StringPredicate extends AbstractPredicate {
     }
 
     public static final class EndsWith extends StringPredicate {
-        public static final Identifier ID = Identifier.of("ends_with");
+        public static final Identifier ID = Identifier.parse("ends_with");
         public static final MapCodec<EndsWith> CODEC = StringPredicate.codec(EndsWith::new);
 
         public <T extends MinecraftPredicate> EndsWith(Object value, Object argument) {
@@ -81,7 +80,7 @@ public abstract class StringPredicate extends AbstractPredicate {
     }
 
     public static final class Join extends StringPredicate {
-        public static final Identifier ID = Identifier.of("join_string");
+        public static final Identifier ID = Identifier.parse("join_string");
         public static final MapCodec<Join> CODEC = StringPredicate.codec(Join::new);
 
         public <T extends MinecraftPredicate> Join(Object value, Object argument) {

@@ -4,7 +4,7 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import eu.pb4.predicate.api.MinecraftPredicate;
 import eu.pb4.predicate.api.PredicateRegistry;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 public final class GenericObject {
     public static final Codec<Object> CODEC = (Codec<Object>) (Object) Codec.either(PredicateRegistry.CODEC, Codec.either(Codec.STRING, Codec.DOUBLE));
@@ -28,7 +28,7 @@ public final class GenericObject {
         try {
             if (value instanceof Number d) {
                 return d.doubleValue();
-            } else if (value instanceof Text text) {
+            } else if (value instanceof Component text) {
                 return Double.parseDouble(text.getString());
             } else if (value instanceof String string) {
                 return Double.parseDouble(string);
@@ -41,7 +41,7 @@ public final class GenericObject {
 
     public static String toString(Object value) {
         try {
-            if (value instanceof Text text) {
+            if (value instanceof Component text) {
                 return text.getString();
             } else if (value instanceof String string) {
                 return string;

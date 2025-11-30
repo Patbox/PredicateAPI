@@ -1,10 +1,10 @@
 package eu.pb4.predicate.api;
 
-import net.minecraft.text.PlainTextContent;
-import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.PlainTextContents;
 
 public record PredicateResult<T>(boolean success, @Nullable T value) {
     public static <T> PredicateResult<T> ofNullable(@Nullable T value) {
@@ -31,8 +31,8 @@ public record PredicateResult<T>(boolean success, @Nullable T value) {
         return new PredicateResult<>(value, value);
     }
 
-    public static PredicateResult<Text> ofText(Text value) {
-        return new PredicateResult<>(!value.getSiblings().isEmpty() && value.getContent() != PlainTextContent.EMPTY, value);
+    public static PredicateResult<Component> ofText(Component value) {
+        return new PredicateResult<>(!value.getSiblings().isEmpty() && value.getContents() != PlainTextContents.EMPTY, value);
     }
 
     public static <T> PredicateResult<T> ofOptional(Optional<T> optional) {

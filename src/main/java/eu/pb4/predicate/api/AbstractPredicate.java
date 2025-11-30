@@ -1,7 +1,7 @@
 package eu.pb4.predicate.api;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 
 public abstract class AbstractPredicate implements MinecraftPredicate {
 

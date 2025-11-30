@@ -3,10 +3,10 @@ package eu.pb4.predicate.impl.predicates.generic;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import eu.pb4.predicate.api.*;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 
 public final class NegatePredicate extends AbstractPredicate {
-    public static final Identifier ID = Identifier.of("negate");
+    public static final Identifier ID = Identifier.parse("negate");
     public static final MapCodec<NegatePredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             PredicateRegistry.CODEC.fieldOf("value").forGetter(NegatePredicate::value)
     ).apply(instance, NegatePredicate::new));

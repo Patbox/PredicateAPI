@@ -7,10 +7,10 @@ import eu.pb4.predicate.api.AbstractPredicate;
 import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
 import me.lucko.fabric.api.permissions.v0.Options;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 
 public final class PermissionOptionPredicate extends AbstractPredicate {
-    public static final Identifier ID = Identifier.of("permission_option");
+    public static final Identifier ID = Identifier.parse("permission_option");
     public static final MapCodec<PermissionOptionPredicate> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.STRING.fieldOf("option").forGetter(PermissionOptionPredicate::permission)
     ).apply(instance, PermissionOptionPredicate::new));

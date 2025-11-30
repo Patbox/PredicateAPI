@@ -3,9 +3,8 @@ package eu.pb4.predicate.impl;
 import com.mojang.serialization.*;
 import eu.pb4.predicate.api.MinecraftPredicate;
 import eu.pb4.predicate.api.PredicateRegistry;
-import net.minecraft.util.Identifier;
-
 import java.util.stream.Stream;
+import net.minecraft.resources.Identifier;
 
 public class BaseCodec extends MapCodec<MinecraftPredicate> {
     @Override

@@ -11,6 +11,7 @@ import eu.pb4.predicate.impl.predicates.generic.*;
 import eu.pb4.predicate.impl.predicates.player.OperatorPredicate;
 import eu.pb4.predicate.impl.predicates.player.StatisticPredicate;
 import eu.pb4.predicate.impl.predicates.player.EntityPredicatePredicate;
+import eu.pb4.predicate.impl.predicates.player.VanillaPermissionPredicate;
 import net.minecraft.util.Identifier;
 
 
@@ -29,6 +30,7 @@ public class PredicatesInit {
         register(StringPredicate.Join.ID, StringPredicate.Join.CODEC);
 
         register(OperatorPredicate.ID, OperatorPredicate.CODEC);
+        register(VanillaPermissionPredicate.ID, VanillaPermissionPredicate.CODEC);
         register(StatisticPredicate.ID, StatisticPredicate.CODEC);
         register(EntityPredicatePredicate.ID, EntityPredicatePredicate.CODEC);
 

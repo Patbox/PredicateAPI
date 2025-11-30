@@ -31,7 +31,7 @@ public class EntityPredicatePredicate extends AbstractPredicate {
     @Override
     public PredicateResult<?> test(PredicateContext context) {
         if (context.hasEntity()) {
-            return PredicateResult.ofBoolean(this.entityPredicate.test(context.world(), context.entity().getPos(), context.entity()));
+            return PredicateResult.ofBoolean(this.entityPredicate.test(context.world(), context.entity().getEntityPos(), context.entity()));
         }
         return PredicateResult.ofFailure();
     }

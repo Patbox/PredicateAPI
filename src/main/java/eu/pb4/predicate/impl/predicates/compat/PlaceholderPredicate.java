@@ -3,8 +3,8 @@ package eu.pb4.predicate.impl.predicates.compat;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import eu.pb4.placeholders.api.PlaceholderContext;
 import eu.pb4.placeholders.api.Placeholders;
+import eu.pb4.placeholders.api.ServerPlaceholderContext;
 import eu.pb4.predicate.api.AbstractPredicate;
 import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
@@ -42,8 +42,12 @@ public final class PlaceholderPredicate extends AbstractPredicate {
 
     @Override
     public PredicateResult<?> test(PredicateContext context) {
-        var pCon = new PlaceholderContext(context.server(), context.source(), context.world(), context.player(), context.entity(), context.gameProfile());
-        var result = Placeholders.parsePlaceholder(this.placeholderId, this.arg, pCon);
-        return new PredicateResult<>(result.isValid(), this.raw ? result.string() : result.text());
+        if (context.player() == null){
+            return PredicateResult.ofFailure();
+        }
+
+        var pCon = ServerPlaceholderContext.of(context.player());
+        var result = Placeholders.parseServerPlaceholder(this.placeholderId, this.arg, pCon);
+        return new PredicateResult<>(result.isValid(), this.raw ? result.component().getString() : result.component());
     }
 }

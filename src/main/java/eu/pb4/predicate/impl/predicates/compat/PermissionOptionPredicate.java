@@ -6,7 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import eu.pb4.predicate.api.AbstractPredicate;
 import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
-import me.lucko.fabric.api.permissions.v0.Options;
+//import me.lucko.fabric.api.permissions.v0.Options;
 import net.minecraft.resources.Identifier;
 
 public final class PermissionOptionPredicate extends AbstractPredicate {
@@ -29,6 +29,7 @@ public final class PermissionOptionPredicate extends AbstractPredicate {
 
     @Override
     public PredicateResult<?> test(PredicateContext context) {
-        return PredicateResult.ofOptional(Options.get(context.source(), this.permission));
+        return PredicateResult.ofFailure();
+//        return PredicateResult.ofOptional(Options.get(context.source(), this.permission));
     }
 }

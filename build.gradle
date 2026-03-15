@@ -1,12 +1,12 @@
 plugins {
-	id 'fabric-loom' version '1.13.+'
+	id 'net.fabricmc.fabric-loom' version '1.15.+'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_21
-targetCompatibility = JavaVersion.VERSION_21
+base {
+	archivesName = project.archives_base_name
+}
 
-archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
@@ -50,15 +50,14 @@ loom {
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings loom.officialMojangMappings()
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	//modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modCompileOnly("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
-	modLocalRuntime("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
-	modCompileOnly("eu.pb4:placeholder-api:2.8.1+1.21.10")
-	modCompileOnly("me.lucko:fabric-permissions-api:0.6.0-patbox")
+	//implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	compileOnly("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
+	localRuntime("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
+	compileOnly("eu.pb4:placeholder-api:3.0.0-beta.1+26.1")
+	compileOnly("me.lucko:fabric-permissions-api:0.6.0-patbox")
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
@@ -83,6 +82,7 @@ tasks.withType(JavaCompile).configureEach {
 	// The Minecraft launcher currently installs Java 8 for users, so your mod probably wants to target Java 8 too
 	// JDK 9 introduced a new way of specifying this that will make sure no newer classes or methods are used.
 	// We'll use that if it's available, but otherwise we'll use the older option.
+	it.options.release = 25
 }
 
 java {
@@ -90,11 +90,15 @@ java {
 	// if it is present.
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
 }
 
 jar {
+	inputs.property "archivesName", project.base.archivesName
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
+		rename { "${it}_${inputs.properties.archivesName}"}
 	}
 }
 
@@ -103,14 +107,9 @@ def env = System.getenv()
 // configure the maven publication
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
-			// add all the jars that should be included when publishing to maven
-			artifact(remapJar) {
-				builtBy remapJar
-			}
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
+		create("mavenJava", MavenPublication) {
+			artifactId = project.archives_base_name
+			from components.java
 		}
 	}
 

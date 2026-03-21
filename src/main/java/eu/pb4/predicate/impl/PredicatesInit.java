@@ -4,8 +4,7 @@ import com.mojang.serialization.MapCodec;
 import eu.pb4.predicate.api.MinecraftPredicate;
 import eu.pb4.predicate.api.PredicateRegistry;
 import eu.pb4.predicate.impl.predicates.compat.CompatStatus;
-import eu.pb4.predicate.impl.predicates.compat.PermissionOptionPredicate;
-import eu.pb4.predicate.impl.predicates.compat.PermissionPredicate;
+import eu.pb4.predicate.impl.predicates.compat.FabricPermissionPredicate;
 import eu.pb4.predicate.impl.predicates.compat.PlaceholderPredicate;
 import eu.pb4.predicate.impl.predicates.generic.*;
 import eu.pb4.predicate.impl.predicates.player.OperatorPredicate;
@@ -45,10 +44,9 @@ public class PredicatesInit {
             register(PlaceholderPredicate.ID, PlaceholderPredicate.CODEC);
         }
 
-        if (CompatStatus.LUCKO_PERMISSION_API) {
-            register(PermissionPredicate.ID, PermissionPredicate.CODEC);
-            register(PermissionOptionPredicate.ID, PermissionOptionPredicate.CODEC);
-        }
+        //if (CompatStatus.FABRIC_PERMISSION_API) {
+        register(FabricPermissionPredicate.ID, FabricPermissionPredicate.CODEC);
+        //}
     }
 
     public static void register(MinecraftPredicate predicate) {

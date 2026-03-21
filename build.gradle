@@ -1,12 +1,11 @@
 plugins {
-	id 'fabric-loom' version '1.13.+'
+	id 'net.fabricmc.fabric-loom' version '1.15.+'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_21
-targetCompatibility = JavaVersion.VERSION_21
-
-archivesBaseName = project.archives_base_name
+base {
+	archivesName = project.archives_base_name
+}
 version = project.mod_version
 group = project.maven_group
 
@@ -50,15 +49,13 @@ loom {
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings loom.officialMojangMappings()
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	//modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modCompileOnly("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
-	modLocalRuntime("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
-	modCompileOnly("eu.pb4:placeholder-api:2.8.1+1.21.10")
-	modCompileOnly("me.lucko:fabric-permissions-api:0.6.0-patbox")
+	compileOnly("net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}")
+	localRuntime("net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}")
+	compileOnly("eu.pb4:placeholder-api:3.0.0-beta.2+26.1")
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
@@ -94,7 +91,7 @@ java {
 
 jar {
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
+		rename { "${it}_${project.archives_base_name}"}
 	}
 }
 
@@ -105,11 +102,11 @@ publishing {
 	publications {
 		mavenJava(MavenPublication) {
 			// add all the jars that should be included when publishing to maven
-			artifact(remapJar) {
-				builtBy remapJar
+			artifact(jar) {
+				builtBy jar
 			}
 			artifact(sourcesJar) {
-				builtBy remapSourcesJar
+				builtBy sourcesJar
 			}
 		}
 	}

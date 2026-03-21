@@ -1,7 +1,5 @@
 package eu.pb4.predicate.impl.predicates.generic;
 
-import com.mojang.datafixers.util.Either;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import eu.pb4.predicate.api.*;

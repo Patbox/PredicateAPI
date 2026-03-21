@@ -5,5 +5,5 @@ import net.fabricmc.loader.api.FabricLoader;
 public interface CompatStatus {
     boolean PLACEHOLDER_API = FabricLoader.getInstance().isModLoaded("placeholder-api");
 
-    boolean LUCKO_PERMISSION_API = FabricLoader.getInstance().isModLoaded("fabric-permissions-api-v0");
+    boolean FABRIC_PERMISSION_API = FabricLoader.getInstance().isModLoaded("fabric-permission-api-v1");
 }

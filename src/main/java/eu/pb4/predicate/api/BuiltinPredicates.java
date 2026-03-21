@@ -1,16 +1,19 @@
 package eu.pb4.predicate.api;
 
 import eu.pb4.predicate.impl.predicates.compat.CompatStatus;
-import eu.pb4.predicate.impl.predicates.compat.PermissionPredicate;
+import eu.pb4.predicate.impl.predicates.compat.FabricPermissionPredicate;
 import eu.pb4.predicate.impl.predicates.compat.PlaceholderPredicate;
 import eu.pb4.predicate.impl.predicates.generic.*;
 import eu.pb4.predicate.impl.predicates.player.OperatorPredicate;
 import eu.pb4.predicate.impl.predicates.player.StatisticPredicate;
 import eu.pb4.predicate.impl.predicates.player.EntityPredicatePredicate;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
+
 import net.minecraft.advancements.criterion.EntityPredicate;
 import net.minecraft.server.permissions.PermissionLevel;
 import net.minecraft.stats.StatType;
@@ -74,11 +77,6 @@ public final class BuiltinPredicates {
         return new StringPredicate.EndsWith(input, argument);
     }
 
-    @Deprecated
-    public static MinecraftPredicate operatorLevel(int level) {
-        return new OperatorPredicate(level);
-    }
-
     public static MinecraftPredicate operatorLevel(PermissionLevel level) {
         return new OperatorPredicate(level);
     }
@@ -109,26 +107,17 @@ public final class BuiltinPredicates {
     }
 
     @Nullable
-    public static MinecraftPredicate modPlaceholderApi(String placeholder, boolean raw) {
-        return CompatStatus.PLACEHOLDER_API ? new PlaceholderPredicate(placeholder, raw) : null;
-    }
-
-    @Nullable
     public static MinecraftPredicate modPlaceholderApi(String placeholder) {
-        return CompatStatus.PLACEHOLDER_API ? new PlaceholderPredicate(placeholder, false) : null;
+        return CompatStatus.PLACEHOLDER_API ? new PlaceholderPredicate(placeholder) : null;
     }
 
-    public static MinecraftPredicate modPermissionApi(String permission, int alternativeOperatorLevel) {
-        return CompatStatus.LUCKO_PERMISSION_API ? new PermissionPredicate(permission, alternativeOperatorLevel) : operatorLevel(alternativeOperatorLevel);
-    }
-
-    public static MinecraftPredicate modPermissionApi(String permission, PermissionLevel alternativeOperatorLevel) {
-        return CompatStatus.LUCKO_PERMISSION_API ? new PermissionPredicate(permission, alternativeOperatorLevel.id()) : operatorLevel(alternativeOperatorLevel);
+    public static MinecraftPredicate fabricPermission(Identifier permission, PermissionLevel alternativeOperatorLevel) {
+        return new FabricPermissionPredicate(permission, Optional.ofNullable(alternativeOperatorLevel));
     }
 
     @Nullable
-    public static MinecraftPredicate modPermissionApi(String permission) {
-        return CompatStatus.LUCKO_PERMISSION_API ? new PermissionPredicate(permission, -1) : null;
+    public static MinecraftPredicate fabricPermission(Identifier permission) {
+        return new FabricPermissionPredicate(permission, Optional.empty());
     }
 
     static {

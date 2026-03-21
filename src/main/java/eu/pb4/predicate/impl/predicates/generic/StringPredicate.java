@@ -7,7 +7,7 @@ import eu.pb4.predicate.api.MinecraftPredicate;
 import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
 import eu.pb4.predicate.impl.predicates.GenericObject;
-import java.util.function.BiConsumer;
+
 import java.util.function.BiFunction;
 import net.minecraft.resources.Identifier;
 

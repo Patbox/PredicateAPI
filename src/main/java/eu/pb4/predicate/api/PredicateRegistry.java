@@ -50,19 +50,6 @@ public final class PredicateRegistry {
         CODEC_IDS.put((MapCodec<MinecraftPredicate>) predicateCodec, identifier);
     }
 
-    @Deprecated(forRemoval = true)
-    public static MinecraftPredicate decode(JsonElement object) {
-        return decode(JsonOps.INSTANCE, object);
-    }
-    @Deprecated(forRemoval = true)
-    public static <T> MinecraftPredicate decode(DynamicOps<T> ops, T object) {
-        if (ops instanceof RegistryOps<T> registryOps) {
-            return decode(registryOps, object);
-        }
-
-        return decode(FALLBACK_LOOKUP.createSerializationContext(ops), object);
-    }
-
     static {
         PredicatesInit.initialize();
     }

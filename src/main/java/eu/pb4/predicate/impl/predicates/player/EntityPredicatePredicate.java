@@ -1,7 +1,5 @@
 package eu.pb4.predicate.impl.predicates.player;
 
-import com.google.gson.JsonElement;
-import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import eu.pb4.predicate.api.AbstractPredicate;

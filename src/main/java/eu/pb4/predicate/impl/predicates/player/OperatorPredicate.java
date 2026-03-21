@@ -19,11 +19,6 @@ public final class OperatorPredicate extends AbstractPredicate {
     private final PermissionLevel level;
     private Permission permission;
 
-    @Deprecated
-    public OperatorPredicate(int operator) {
-        this(PermissionLevel.byId(operator));
-    }
-
     public OperatorPredicate(PermissionLevel level) {
         super(ID, CODEC);
         this.level = level;

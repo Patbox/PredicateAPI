@@ -4,12 +4,8 @@ import com.google.gson.*;
 import com.mojang.serialization.JsonOps;
 import java.lang.reflect.Type;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.registries.BuiltInRegistries;
 
 public final class GsonPredicateSerializer implements JsonSerializer<MinecraftPredicate>, JsonDeserializer<MinecraftPredicate> {
-    @Deprecated(forRemoval = true)
-    public static final GsonPredicateSerializer INSTANCE = create(RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY));
     private final HolderLookup.Provider lookup;
 
     public static GsonPredicateSerializer create(HolderLookup.Provider lookup) {

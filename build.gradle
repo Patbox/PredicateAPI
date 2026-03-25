@@ -56,6 +56,7 @@ dependencies {
 	compileOnly("net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}")
 	localRuntime("net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}")
 	compileOnly("eu.pb4:placeholder-api:3.0.0-beta.2+26.1")
+	implementation "me.lucko:fabric-permissions-api:0.7.0"
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.

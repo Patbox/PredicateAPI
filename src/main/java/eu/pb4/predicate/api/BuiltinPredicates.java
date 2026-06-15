@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.predicates.entity.EntityPredicate;
 import net.minecraft.server.permissions.PermissionLevel;
 import net.minecraft.stats.StatType;
 

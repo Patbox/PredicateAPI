@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import eu.pb4.predicate.api.AbstractPredicate;
 import eu.pb4.predicate.api.PredicateContext;
 import eu.pb4.predicate.api.PredicateResult;
-import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.predicates.entity.EntityPredicate;
 import net.minecraft.resources.Identifier;
 
 public class EntityPredicatePredicate extends AbstractPredicate {

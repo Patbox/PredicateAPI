@@ -23,7 +23,7 @@ public interface PredicateContext {
 
     static PredicateContext of(GameProfile profile, MinecraftServer server) {
         var name = !profile.name().isEmpty() ? profile.name() : profile.id().toString();
-        return new PredicateContextImpl(server, Suppliers.ofInstance(new CommandSourceStack(CommandSource.NULL, Vec3.ZERO, Vec2.ZERO, server.overworld(), server.getProfilePermissions(new NameAndId(profile)), name, Component.literal(name), server, null)), null, null, null, profile);
+        return new PredicateContextImpl(server, Suppliers.ofInstance(new CommandSourceStack(CommandSource.NULL, Vec3.ZERO, Vec2.ZERO, server.overworld(), server.getProfilePermissions(new NameAndId(profile)), Component.literal(name), server)), null, null, null, profile);
     }
 
     static PredicateContext of(ServerPlayer player) {
